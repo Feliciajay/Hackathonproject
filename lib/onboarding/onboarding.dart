@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hackathon/constant/app_image.dart';
 import 'package:hackathon/onboarding/pageview/page1.dart';
-import 'package:hackathon/onboarding/pageview/page2.dart';
-import 'package:hackathon/onboarding/pageview/page3.dart';
+
+import 'package:page_view_sliding_indicator/page_view_sliding_indicator.dart';
 
 class Onboarding extends StatefulWidget {
   const Onboarding({super.key});
@@ -22,10 +23,33 @@ class _OnboardingState extends State<Onboarding> {
   Widget build(BuildContext context) {
     return PageView(
       controller: controller,
-      children: const <Widget>[
-        Page1(),
-        Page2(),
-        Page3(),
+      children: <Widget>[
+        Page1(
+            imagePath: AppImages.productscreen1Image,
+            title: 'Choose Products',
+            pageController: controller,
+            currentPage: 0,
+            subTitle:
+                'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.'),
+
+        Page1(
+          imagePath: AppImages.pagetwoImage,
+          title: 'Make Payment',
+          pageController: controller,
+          currentPage: 1,
+          subTitle:
+              'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.',
+        ),
+        Page1(
+          currentPage: 2,
+          imagePath: AppImages.pagethreeImage,
+          pageController: controller,
+          title: 'Get Your Order',
+          subTitle:
+              'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.',
+        ),
+        // Page2(),
+        // Page3(),
       ],
     );
   }

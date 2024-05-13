@@ -18,7 +18,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         child: Scaffold(
           body: Stack(
             children: [
-              const SocialBotton(imagePath: AppImages.screenImage),
+              Image.asset(AppImages.screenImage),
               Padding(
                 padding: const EdgeInsets.only(top: 352, left: 55),
                 child: Column(

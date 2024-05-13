@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -236,45 +238,90 @@ class _HomePageState extends State<HomePage> {
                           height: 100,
                           width: 439,
                           decoration: BoxDecoration(
-                              color: const Color(0xffFFFFFF),
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(width: 1, color: Colors.blue)),
-                          child: const Row(
+                            color: const Color(0xffFFFFFF),
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(width: 1, color: Colors.blue),
+                          ),
+                          child: Row(
                             children: [
                               Column(
                                 children: [
-                                  SocialBotton(
-                                    imagePath: AppImages.beautyImage,
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 15, top: 12),
+                                    child: Image.asset(
+                                      AppImages.beautyImage,
+                                      width: 60,
+                                      height: 60,
+                                    ),
                                   ),
-                                  Text('Beauty')
+                                  const Text('     Beauty')
                                 ],
+                              ),
+                              const SizedBox(
+                                width: 15,
                               ),
                               SingleChildScrollView(
                                 child: Column(
                                   children: [
-                                    SocialBotton(
-                                        imagePath: AppImages.fashionImage),
-                                    Text('Fashion')
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 10),
+                                      child: Image.asset(
+                                        AppImages.fashionImage,
+                                        width: 60,
+                                        height: 60,
+                                      ),
+                                    ),
+                                    const Text('Fashion')
                                   ],
                                 ),
                               ),
-                              Column(
-                                children: [
-                                  SocialBotton(imagePath: AppImages.kidsImage),
-                                  Text('Kids')
-                                ],
+                              const SizedBox(
+                                width: 15,
                               ),
                               Column(
                                 children: [
-                                  SocialBotton(imagePath: AppImages.mensImage),
-                                  Text('Mens')
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 13),
+                                    child: Image.asset(
+                                      AppImages.kidsImage,
+                                      width: 60,
+                                      height: 60,
+                                    ),
+                                  ),
+                                  const Text(' Kids')
                                 ],
+                              ),
+                              const SizedBox(
+                                width: 15,
                               ),
                               Column(
                                 children: [
-                                  SocialBotton(
-                                      imagePath: AppImages.womensImage),
-                                  Text('Womens')
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 15),
+                                    child: Image.asset(
+                                      AppImages.mensImage,
+                                      width: 60,
+                                      height: 60,
+                                    ),
+                                  ),
+                                  const Text('Mens')
+                                ],
+                              ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 15),
+                                    child: Image.asset(
+                                      AppImages.womensImage,
+                                      width: 60,
+                                      height: 60,
+                                    ),
+                                  ),
+                                  const Text('Womens')
                                 ],
                               ),
                             ],
