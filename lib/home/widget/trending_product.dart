@@ -14,7 +14,7 @@ class _TrendingProductsState extends State<TrendingProducts> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffFDFDFD),
+      backgroundColor: const Color(0xffFDFDFD),
       appBar: AppBar(
         iconTheme: const IconThemeData(size: 20),
         elevation: 0.0,
@@ -296,13 +296,16 @@ class _TrendingProductsState extends State<TrendingProducts> {
             SizedBox(
               height: 500,
               child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      mainAxisSpacing: 5,
+                      crossAxisSpacing: 5,
                       crossAxisCount: 2),
+                  itemCount: 14,
                   itemBuilder: (context, index) {
                     return Container(
-                      height: 341,
+                      height: 380,
                       width: 170,
-                      decoration: BoxDecoration(color: Colors.red),
+                      decoration: const BoxDecoration(color: Colors.red),
                     );
                   }),
             )
