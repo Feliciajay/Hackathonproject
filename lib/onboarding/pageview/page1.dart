@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hackathon/constant/app_image.dart';
+import 'package:hackathon/signin/signin.dart';
 import 'package:hackathon/signin/widget/social_botton.dart';
 import 'package:page_view_sliding_indicator/page_view_sliding_indicator.dart';
 
@@ -38,16 +39,16 @@ class _Page1State extends State<Page1> {
                 Row(
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(left: 17, top: 10),
+                      padding: const EdgeInsets.only(left: 17, top: 10),
                       child: Text(
                         '${widget.currentPage + 1}',
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
                             color: Colors.black),
                       ),
                     ),
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.only(top: 10),
                       child: Text(
                         '/3',
@@ -59,7 +60,7 @@ class _Page1State extends State<Page1> {
                     ),
                   ],
                 ),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(left: 17, top: 10),
                   child: Text(
                     'Skip',
@@ -106,7 +107,7 @@ class _Page1State extends State<Page1> {
                       ? GestureDetector(
                           onTap: () {
                             widget.pageController.previousPage(
-                                duration: Duration(milliseconds: 200),
+                                duration: const Duration(milliseconds: 200),
                                 curve: Curves.fastOutSlowIn);
                           },
                           child: const Text(
@@ -126,10 +127,15 @@ class _Page1State extends State<Page1> {
                   GestureDetector(
                     onTap: () {
                       if (widget.currentPage == 2) {
-                        // Navigator.push(context, route)
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) {
+                            return const SignInPage();
+                          }),
+                        );
                       } else {
                         widget.pageController.nextPage(
-                            duration: Duration(milliseconds: 200),
+                            duration: const Duration(milliseconds: 200),
                             curve: Curves.linear);
                       }
                     },

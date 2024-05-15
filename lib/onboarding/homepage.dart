@@ -1,10 +1,11 @@
 import 'dart:ui';
-
+import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:hackathon/constant/app_image.dart';
+import 'package:hackathon/onboarding/widget/trending_product.dart';
 import 'package:hackathon/signin/widget/social_botton.dart';
 import 'package:page_view_sliding_indicator/page_view_sliding_indicator.dart';
 
@@ -17,6 +18,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final scrollController = PageController();
+  int myIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,56 +30,130 @@ class _HomePageState extends State<HomePage> {
             iconTheme: const IconThemeData(size: 20),
             elevation: 0.0,
             backgroundColor: Colors.white,
-            actions: const <Widget>[
-              SocialBotton(
-                imagePath: AppImages.frontpageImage,
+            actions: <Widget>[
+              Container(
+                height: 120,
+                width: 120,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(
+                      AppImages.frontpageImage,
+                    ),
+                  ),
+                ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 90,
               ),
-              SocialBotton(imagePath: AppImages.avatarImage),
-              SizedBox(
+              Container(
+                height: 50,
+                width: 50,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(
+                      AppImages.avatarImage,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
                 width: 10,
               ),
             ],
           ),
+          bottomNavigationBar: BottomNavigationBar(
+              selectedItemColor: Colors.blue,
+              unselectedItemColor: Colors.red,
+              onTap: (index) {
+                setState(() {
+                  myIndex = index;
+                });
+              },
+              currentIndex: myIndex,
+              items: const [
+                BottomNavigationBarItem(
+                  label: 'Home',
+                  icon: Icon(
+                    Icons.home,
+                    size: 28,
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  label: 'Wishlist',
+                  icon: Icon(
+                    Icons.favorite,
+                    size: 28,
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  label: 'Cart',
+                  icon: Icon(
+                    Icons.shopping_cart,
+                    size: 28,
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  label: 'Search',
+                  icon: Icon(
+                    Icons.search,
+                    size: 28,
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  label: 'Settings',
+                  icon: Icon(
+                    Icons.settings,
+                    size: 28,
+                  ),
+                ),
+              ]),
           drawerEnableOpenDragGesture: true,
           drawer: Drawer(
             child: ListView(
-              children: const [
+              children: [
                 DrawerHeader(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.green,
                   ),
                   child: CircleAvatar(
-                    child: SocialBotton(imagePath: AppImages.googleImage),
+                    child: Container(
+                      height: 120,
+                      width: 120,
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(
+                            AppImages.frontpageImage,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-                ListTile(
+                const ListTile(
                   title: Text(
                     'Home',
                     style: TextStyle(color: Colors.blue),
                   ),
                 ),
-                ListTile(
+                const ListTile(
                   title: Text(
                     'Shop',
                     style: TextStyle(color: Colors.purple),
                   ),
                 ),
-                ListTile(
+                const ListTile(
                   title: Text(
                     'Payment',
                     style: TextStyle(color: Colors.red),
                   ),
                 ),
-                ListTile(
+                const ListTile(
                   title: Text(
                     'Terms and Conditions',
                     style: TextStyle(color: Colors.green),
                   ),
                 ),
-                ListTile(
+                const ListTile(
                   title: Text(
                     'Company',
                     style: TextStyle(color: Colors.pink),
@@ -758,24 +835,32 @@ class _HomePageState extends State<HomePage> {
                               ),
                               borderRadius: BorderRadius.circular(4),
                             ),
-                            child: const Row(
-                              children: [
-                                Text(
-                                  '  View all',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w600,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (_) {
+                                  return const TrendingProducts();
+                                }));
+                              },
+                              child: const Row(
+                                children: [
+                                  Text(
+                                    '  View all',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color(0xffffffff),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Icon(
+                                    Icons.arrow_forward,
                                     color: Color(0xffffffff),
                                   ),
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Icon(
-                                  Icons.arrow_forward,
-                                  color: Color(0xffffffff),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                           const Padding(
