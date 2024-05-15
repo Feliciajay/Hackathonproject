@@ -300,7 +300,7 @@ class _TrendingProductsState extends State<TrendingProducts> {
                   return Container(
                     height: 341,
                     width: 170,
-                    decoration: BoxDecoration(),
+                    decoration: BoxDecoration(color: Colors.red),
                   );
                 })
           ],

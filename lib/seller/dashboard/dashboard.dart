@@ -17,7 +17,11 @@ class SellerDashBoard extends StatelessWidget {
                 color: AppColor.green,
               ),
               child: Column(
-                children: [Text("Total Product")],
+                children: [
+                  Text(
+                    "Total Product",
+                  )
+                ],
               ))
         ],
       ),
