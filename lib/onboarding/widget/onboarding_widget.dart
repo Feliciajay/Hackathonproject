@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:hackathon/constant/app_image.dart';
+
 import 'package:hackathon/signin/signin.dart';
-import 'package:hackathon/signin/widget/social_botton.dart';
+
 import 'package:page_view_sliding_indicator/page_view_sliding_indicator.dart';
 
 class Page1 extends StatefulWidget {
