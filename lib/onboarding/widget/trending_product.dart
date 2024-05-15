@@ -293,11 +293,16 @@ class _TrendingProductsState extends State<TrendingProducts> {
             const SizedBox(
               height: 16,
             ),
-            Container(
-              width: 164,
-              height: 245,
-              decoration: BoxDecoration(color: Colors.grey),
-            )
+            GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2),
+                itemBuilder: (context, index) {
+                  return Container(
+                    height: 341,
+                    width: 170,
+                    decoration: BoxDecoration(),
+                  );
+                })
           ],
         ),
       ),
