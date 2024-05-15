@@ -16,7 +16,6 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   TextEditingController emailEditingController = TextEditingController();
   TextEditingController passwordEditingController = TextEditingController();
-  bool _obscuretext = true;
 
   @override
   Widget build(BuildContext context) {

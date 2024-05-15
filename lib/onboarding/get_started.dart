@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hackathon/constant/app_image.dart';
-import 'package:hackathon/onboarding/homepage.dart';
-import 'package:hackathon/signin/widget/social_botton.dart';
+import 'package:hackathon/home/homepage.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});

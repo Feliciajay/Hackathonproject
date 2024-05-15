@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hackathon/onboarding/onboardingscreen.dart';
+import 'package:hackathon/onboarding/get_started.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});

@@ -2,9 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hackathon/constant/app_image.dart';
-import 'package:hackathon/onboarding/pageview/page1.dart';
-
-import 'package:page_view_sliding_indicator/page_view_sliding_indicator.dart';
+import 'package:hackathon/onboarding/widget/onboarding_widget.dart';
 
 class Onboarding extends StatefulWidget {
   const Onboarding({super.key});
