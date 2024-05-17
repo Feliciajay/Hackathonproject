@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hackathon/onboarding/provider/onboard_provider.dart';
 
 import 'package:hackathon/signin/signin.dart';
 
 import 'package:page_view_sliding_indicator/page_view_sliding_indicator.dart';
+import 'package:provider/provider.dart';
 
 class Page1 extends StatefulWidget {
-  final PageController pageController;
   final String title;
   final String subTitle;
   final String imagePath;
@@ -13,7 +14,6 @@ class Page1 extends StatefulWidget {
   const Page1(
       {super.key,
       required this.currentPage,
-      required this.pageController,
       required this.title,
       required this.subTitle,
       required this.imagePath});
@@ -70,8 +70,9 @@ class _Page1State extends State<Page1> {
                 ),
               ],
             ),
-            SingleChildScrollView(
-              child: Center(
+            Center(
+              child: Container(
+                height: 400,
                 child: Image.asset(
                   widget.imagePath,
                 ),
@@ -80,74 +81,80 @@ class _Page1State extends State<Page1> {
             const SizedBox(
               height: 40,
             ),
-            Column(children: [
-              Text(
-                widget.title,
-                style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w800,
-                    color: Color(0xff000000)),
-              ),
-              Text(
-                widget.subTitle,
-                style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xffA8A8A9)),
-              ),
-              const SizedBox(
-                height: 120,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  widget.currentPage > 0
-                      ? GestureDetector(
-                          onTap: () {
-                            widget.pageController.previousPage(
-                                duration: const Duration(milliseconds: 200),
-                                curve: Curves.fastOutSlowIn);
-                          },
-                          child: const Text(
-                            'Prev',
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                                color: Color(0xffF83758)),
-                          ),
-                        )
-                      : Container(),
-                  PageViewSlidingIndicator(
-                    color: Colors.pink,
-                    controller: widget.pageController,
-                    pageCount: 3,
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: Column(children: [
+                Text(
+                  widget.title,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w800,
+                      color: Color(0xff000000)),
+                ),
+                Text(
+                  widget.subTitle,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xffA8A8A9)),
+                ),
+              ]),
+            ),
+            Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                widget.currentPage > 0
+                    ? GestureDetector(
+                        onTap: () {
+                          Provider.of<OnboardingProvider>(context,
+                                  listen: false)
+                              .prevOnPressed();
+                        },
+                        child: const Text(
+                          'Prev',
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xffF83758)),
+                        ),
+                      )
+                    : Container(),
+                PageViewSlidingIndicator(
+                  color: Colors.pink,
+                  controller:
+                      Provider.of<OnboardingProvider>(context).controller,
+                  pageCount: 3,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    if (widget.currentPage == 2) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) {
+                          return const SignInPage();
+                        }),
+                      );
+                    } else {
+                      Provider.of<OnboardingProvider>(context, listen: false)
+                          .nextOnPressed();
+                    }
+                  },
+                  child: const Text(
+                    'Next',
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xffF83758)),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      if (widget.currentPage == 2) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) {
-                            return const SignInPage();
-                          }),
-                        );
-                      } else {
-                        widget.pageController.nextPage(
-                            duration: const Duration(milliseconds: 200),
-                            curve: Curves.linear);
-                      }
-                    },
-                    child: const Text(
-                      'Next',
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xffF83758)),
-                    ),
-                  )
-                ],
-              ),
-            ]),
+                )
+              ],
+            ),
+            SizedBox(
+              height: 50,
+            )
           ]),
         )));
   }

@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:hackathon/home/provider/navbar_provider.dart';
+import 'package:hackathon/onboarding/provider/onboard_provider.dart';
 import 'package:hackathon/splash.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_) {
+      return NavbarProvider();
+    }),
+    ChangeNotifierProvider(create: (_) {
+      return OnboardingProvider();
+    })
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

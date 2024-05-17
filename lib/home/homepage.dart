@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
 import 'package:hackathon/constant/app_image.dart';
+import 'package:hackathon/home/widget/banner_widget.dart';
 import 'package:hackathon/home/widget/trending_product.dart';
 
 import 'package:page_view_sliding_indicator/page_view_sliding_indicator.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeScreenState extends State<HomeScreen> {
   final scrollController = PageController();
-  int myIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -57,52 +57,6 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-          bottomNavigationBar: BottomNavigationBar(
-              selectedItemColor: Colors.blue,
-              unselectedItemColor: Colors.red,
-              onTap: (index) {
-                setState(() {
-                  myIndex = index;
-                });
-              },
-              currentIndex: myIndex,
-              items: const [
-                BottomNavigationBarItem(
-                  label: 'Home',
-                  icon: Icon(
-                    Icons.home,
-                    size: 28,
-                  ),
-                ),
-                BottomNavigationBarItem(
-                  label: 'Wishlist',
-                  icon: Icon(
-                    Icons.favorite,
-                    size: 28,
-                  ),
-                ),
-                BottomNavigationBarItem(
-                  label: 'Cart',
-                  icon: Icon(
-                    Icons.shopping_cart,
-                    size: 28,
-                  ),
-                ),
-                BottomNavigationBarItem(
-                  label: 'Search',
-                  icon: Icon(
-                    Icons.search,
-                    size: 28,
-                  ),
-                ),
-                BottomNavigationBarItem(
-                  label: 'Settings',
-                  icon: Icon(
-                    Icons.settings,
-                    size: 28,
-                  ),
-                ),
-              ]),
           drawerEnableOpenDragGesture: true,
           drawer: Drawer(
             child: ListView(
@@ -407,29 +361,7 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 16,
                 ),
-                SizedBox(
-                  height: 180,
-                  child: Expanded(
-                    child: PageView.builder(
-                        controller: scrollController,
-                        itemCount: 3,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            margin: const EdgeInsets.only(right: 10),
-                            height: 100,
-                            width: 100,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              image: const DecorationImage(
-                                image: AssetImage(
-                                  AppImages.pageviewImage,
-                                ),
-                              ),
-                            ),
-                          );
-                        }),
-                  ),
-                ),
+                BannerWidget(scrollController: scrollController),
                 const SizedBox(
                   height: 10,
                 ),
