@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hackathon/home/homepage.dart';
+import 'package:hackathon/home/widget/shop_page.dart';
 import 'package:hackathon/home/widget/trending_product.dart';
 
 class NavbarProvider extends ChangeNotifier {
@@ -8,14 +9,12 @@ class NavbarProvider extends ChangeNotifier {
   List listOfScreen = [
     const HomeScreen(),
     const TrendingProducts(),
-    const Center(
-      child: Text("cart"),
-    ),
+    const ShopPage(),
     const Center(
       child: Text("Search"),
     ),
     const Center(
-      child: Text("Settings"),
+      child: Text("Profile"),
     ),
   ];
 

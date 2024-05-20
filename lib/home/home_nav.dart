@@ -48,9 +48,9 @@ class Home extends StatelessWidget {
                 ),
               ),
               BottomNavigationBarItem(
-                label: 'Settings',
+                label: 'Profile',
                 icon: Icon(
-                  Icons.settings,
+                  Icons.person,
                   size: 28,
                 ),
               ),

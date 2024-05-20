@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:hackathon/constant/app_image.dart';
 import 'package:hackathon/home/widget/banner_widget.dart';
+import 'package:hackathon/home/widget/product_home.dart';
+import 'package:hackathon/home/widget/rowavatar.dart';
+import 'package:hackathon/home/widget/shop_page.dart';
 import 'package:hackathon/home/widget/trending_product.dart';
 
 import 'package:page_view_sliding_indicator/page_view_sliding_indicator.dart';
@@ -19,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: SafeArea(
         child: Scaffold(
           backgroundColor: const Color(0xffFDFDFD),
@@ -85,8 +89,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: TextStyle(color: Colors.blue),
                   ),
                 ),
-                const ListTile(
-                  title: Text(
+                ListTile(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (_) {
+                      return const ShopPage();
+                    }));
+                  },
+                  title: const Text(
                     'Shop',
                     style: TextStyle(color: Colors.purple),
                   ),
@@ -254,110 +263,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(
                   height: 16,
                 ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16),
-                        child: Container(
-                          padding: const EdgeInsets.only(left: 2),
-                          height: 100,
-                          width: 439,
-                          decoration: BoxDecoration(
-                            color: const Color(0xffFFFFFF),
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(width: 1, color: Colors.blue),
-                          ),
-                          child: Row(
-                            children: [
-                              Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 15, top: 12),
-                                    child: Image.asset(
-                                      AppImages.beautyImage,
-                                      width: 60,
-                                      height: 60,
-                                    ),
-                                  ),
-                                  const Text('     Beauty')
-                                ],
-                              ),
-                              const SizedBox(
-                                width: 15,
-                              ),
-                              SingleChildScrollView(
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 10),
-                                      child: Image.asset(
-                                        AppImages.fashionImage,
-                                        width: 60,
-                                        height: 60,
-                                      ),
-                                    ),
-                                    const Text('Fashion')
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 15,
-                              ),
-                              Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 13),
-                                    child: Image.asset(
-                                      AppImages.kidsImage,
-                                      width: 60,
-                                      height: 60,
-                                    ),
-                                  ),
-                                  const Text(' Kids')
-                                ],
-                              ),
-                              const SizedBox(
-                                width: 15,
-                              ),
-                              Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 15),
-                                    child: Image.asset(
-                                      AppImages.mensImage,
-                                      width: 60,
-                                      height: 60,
-                                    ),
-                                  ),
-                                  const Text('Mens')
-                                ],
-                              ),
-                              const SizedBox(
-                                width: 15,
-                              ),
-                              Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 15),
-                                    child: Image.asset(
-                                      AppImages.womensImage,
-                                      width: 60,
-                                      height: 60,
-                                    ),
-                                  ),
-                                  const Text('Womens')
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                const RowAvatar(),
                 const SizedBox(
                   height: 16,
                 ),
@@ -451,231 +357,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(
                       height: 16,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Row(
-                        children: [
-                          Column(
-                            children: [
-                              Container(
-                                height: 245,
-                                width: 170,
-                                decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                        'assets/images/ladies.png',
-                                      ),
-                                      alignment: Alignment.topCenter),
-                                ),
-                                child: const Padding(
-                                  padding: EdgeInsets.only(
-                                    top: 130,
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(right: 40),
-                                        child: Text(
-                                          'Women Printed Kurta',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(right: 14),
-                                        child: Text(
-                                          'Neque porro quis quam est qui\ndolorem ipsum quia',
-                                          style: TextStyle(
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 4,
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(right: 120),
-                                        child: Text(
-                                          '₹1500',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w500,
-                                            color: Color(0xff000000),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 4,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            '  ₹2499',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w500,
-                                              color: Color(0xffbbbbbb),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 4,
-                                          ),
-                                          Text(
-                                            '40%Off',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w400,
-                                              color: Color(0xffFE735C),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 4,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            '  ✯✯✯✯✯',
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w400,
-                                              color: Colors.yellow,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 4,
-                                          ),
-                                          Text(
-                                            '56890',
-                                            style: TextStyle(
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.w400,
-                                              color: Color(0xffA4A9B3),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Container(
-                            height: 245,
-                            width: 170,
-                            decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage(
-                                    'assets/images/shoe.png',
-                                  ),
-                                  alignment: Alignment.topCenter),
-                            ),
-                            child: const Padding(
-                              padding: EdgeInsets.only(
-                                top: 130,
-                              ),
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 40),
-                                    child: Text(
-                                      'HRX by Hrithik Roshan',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 14),
-                                    child: Text(
-                                      'Neque porro quis quam est qui\ndolorem ipsum quia',
-                                      style: TextStyle(
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 4,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 120),
-                                    child: Text(
-                                      '₹2499',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500,
-                                        color: Color(0xff000000),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 4,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        '  ₹4499',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w500,
-                                          color: Color(0xffbbbbbb),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 4,
-                                      ),
-                                      Text(
-                                        '50%Off',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w400,
-                                          color: Color(0xffFE735C),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 4,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        '  ✯✯✯✯✯',
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w400,
-                                          color: Colors.yellow,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 4,
-                                      ),
-                                      Text(
-                                        '344567',
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w400,
-                                          color: Color(0xffA4A9B3),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 30),
+                      child: ProductsHome(),
                     ),
                     const SizedBox(
                       height: 16,
@@ -818,165 +502,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(
                   height: 16,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 30),
-                  child: Row(
-                    children: [
-                      Column(
-                        children: [
-                          Container(
-                            height: 245,
-                            width: 170,
-                            decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage(AppImages.watchImage),
-                                  alignment: Alignment.topCenter),
-                            ),
-                            child: const Padding(
-                              padding: EdgeInsets.only(
-                                top: 130,
-                              ),
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 40),
-                                    child: Text(
-                                      'IWC Schaffhausen 2021 Pilot\'s Watch "SIHH 2019" 44mm',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 4,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 130),
-                                    child: Text(
-                                      '₹650',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500,
-                                        color: Color(0xff000000),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 4,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        '  ₹1599',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w500,
-                                          color: Color(0xffbbbbbb),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 4,
-                                      ),
-                                      Text(
-                                        '60%Off',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w400,
-                                          color: Color(0xffFE735C),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Row(
-                          children: [
-                            Column(
-                              children: [
-                                Container(
-                                  height: 245,
-                                  width: 170,
-                                  decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                        image:
-                                            AssetImage(AppImages.sneakersImage),
-                                        alignment: Alignment.topCenter),
-                                  ),
-                                  child: const Padding(
-                                    padding: EdgeInsets.only(
-                                      top: 130,
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(right: 40),
-                                          child: Text(
-                                            'Labbin White Sneakers For Men and Female',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 4,
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(right: 135),
-                                          child: Text(
-                                            '₹650',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w500,
-                                              color: Color(0xff000000),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 4,
-                                        ),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              '  ₹1250',
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w500,
-                                                color: Color(0xffbbbbbb),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: 4,
-                                            ),
-                                            Text(
-                                              '70%Off',
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w400,
-                                                color: Color(0xffFE735C),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                const Padding(
+                    padding: EdgeInsets.only(left: 30), child: ProductsHome()),
                 const SizedBox(
                   height: 10,
                 ),

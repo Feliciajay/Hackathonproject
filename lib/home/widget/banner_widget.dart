@@ -16,7 +16,7 @@ class BannerWidget extends StatelessWidget {
       child: Expanded(
         child: PageView.builder(
             controller: scrollController,
-            itemCount: 3,
+            itemCount: 4,
             itemBuilder: (context, index) {
               return Container(
                 margin: const EdgeInsets.only(right: 10),

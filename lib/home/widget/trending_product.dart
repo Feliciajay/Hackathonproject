@@ -252,7 +252,7 @@ class _TrendingProductsState extends State<TrendingProducts> {
           ),
           Container(
               padding: const EdgeInsets.symmetric(horizontal: 15),
-              height: 500,
+              height: 600,
               child: MasonryGridView.count(
                 itemCount: ProductProvider.listOfproduct.length,
                 crossAxisCount: 2,
