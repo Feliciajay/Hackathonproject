@@ -23,7 +23,13 @@ class _AuthTextFieldState extends State<AuthTextField> {
             ? const Icon(Icons.person)
             : widget.hintText.toLowerCase().contains("password")
                 ? const Icon(Icons.lock)
-                : null,
+                : widget.hintText.toLowerCase().contains("store")
+                    ? Icon(Icons.store)
+                    : widget.hintText.toLowerCase().contains("name")
+                        ? Icon(Icons.person_2_rounded)
+                        : widget.hintText.toLowerCase().contains("number")
+                            ? Icon(Icons.balance)
+                            : null,
         suffixIcon: widget.hintText.toLowerCase().contains("password")
             ? IconButton(
                 icon: Icon(
