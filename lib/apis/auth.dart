@@ -1,12 +1,15 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hackathon/apis/uploads.dart';
 
 class AuthService {
   static var firebaseauth = FirebaseAuth.instance;
   static var firebaseFireStore = FirebaseFirestore.instance;
-  static Future createUser({
+  static Future<User?> createUser({
     required String email,
     required String password,
     required bool isSeller,
@@ -16,6 +19,7 @@ class AuthService {
     String? accountNumber,
     String? state,
     String? bankName,
+    File? image,
     required BuildContext context,
   }) async {
     try {
@@ -23,47 +27,58 @@ class AuthService {
       var cre = await firebaseauth.createUserWithEmailAndPassword(
           email: email, password: password);
 
-      if (isSeller) {
-        data = {
-          "email": email,
-          "firstName": firstName,
-          "lastName": lastName,
-          "storeName": storeName,
-          "accountNumber": accountNumber,
-          "bankName": bankName,
-          "state": state,
-          "userType": "seller"
-        };
-      } else {
-        data = {
-          "email": email,
-          "firstName": firstName,
-          "lastName": lastName,
-          "userType": "user"
-        };
-      }
+      if (image != null) {
+        String? profileUrl = await FileUpload.UploadFile(image!, context);
+        if (isSeller) {
+          data = {
+            "email": email,
+            "firstName": firstName,
+            "lastName": lastName,
+            "storeName": storeName,
+            "accountNumber": accountNumber,
+            "bankName": bankName,
+            "state": state,
+            "userType": "seller",
+            "profileUrl": profileUrl,
+          };
+        } else {
+          data = {
+            "email": email,
+            "firstName": firstName,
+            "lastName": lastName,
+            "userType": "user",
+            "profileUrl": profileUrl,
+          };
+        }
 
-      if (data != null) {
-        firebaseFireStore.collection("users").doc(cre.user?.uid).set(data);
+        if (data != null) {
+          var user = await firebaseFireStore
+              .collection("users")
+              .doc(cre.user?.uid)
+              .set(data);
+        }
       }
-
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Registration Successful')));
+
+      return cre.user;
     } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('${e.message}')));
     }
   }
 
-  Future loginUser(
+  static Future<User?> loginUser(
       {required String email,
       required String password,
       required BuildContext context}) async {
     try {
-      firebaseauth.signInWithEmailAndPassword(email: email, password: password);
-      await ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      var cre = await firebaseauth.signInWithEmailAndPassword(
+          email: email, password: password);
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('SignUp Successful'),
       ));
+      return cre.user;
     } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('${e.message}')));

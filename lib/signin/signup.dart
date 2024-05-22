@@ -1,11 +1,19 @@
+import 'dart:ffi';
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hackathon/apis/auth.dart';
+import 'package:hackathon/constant/app_color.dart';
 import 'package:hackathon/constant/app_image.dart';
+import 'package:hackathon/core/pick_image.dart';
 import 'package:hackathon/onboarding/get_started.dart';
 import 'package:hackathon/signin/signin.dart';
 import 'package:hackathon/signin/widget/auth_text_field.dart';
+import 'package:image_picker/image_picker.dart';
 
+import '../home/home_nav.dart';
 import 'widget/social_botton.dart';
 
 class SignUp extends StatefulWidget {
@@ -16,6 +24,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  File? userImage;
   TextEditingController emailEditingController = TextEditingController();
   TextEditingController passwordEditingController = TextEditingController();
   TextEditingController storeEditingController = TextEditingController();
@@ -23,7 +32,8 @@ class _SignUpState extends State<SignUp> {
   TextEditingController lastNameEditingController = TextEditingController();
   TextEditingController accountNumberEditingController =
       TextEditingController();
-  TextEditingController comfirmemailEditingController = TextEditingController();
+  TextEditingController comfirmPasswordEditingController =
+      TextEditingController();
 
   String userType = "user";
   bool isSeller = false;
@@ -36,13 +46,121 @@ class _SignUpState extends State<SignUp> {
           child: SingleChildScrollView(
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const Text(
-                'Create an\n account!',
-                style: TextStyle(
-                  fontSize: 36,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.black,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Create an\n account!',
+                    style: TextStyle(
+                      fontSize: 36,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black,
+                    ),
+                  ),
+                  Stack(children: [
+                    CircleAvatar(
+                      radius: 70,
+                      child: userImage == null
+                          ? Icon(
+                              Icons.android,
+                              size: 70,
+                            )
+                          : Container(
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                      image: FileImage(
+                                        userImage!,
+                                      ),
+                                      fit: BoxFit.fill)),
+                            ),
+                    ),
+                    Positioned(
+                      bottom: 7,
+                      right: 15,
+                      child: GestureDetector(
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                    title: Text(
+                                      "Pick Your Desire",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    actions: [
+                                      SizedBox(
+                                        width: double.infinity,
+                                        child: ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                                backgroundColor: AppColor.pink),
+                                            onPressed: () async {
+                                              File? file =
+                                                  await DCore.pickImages(
+                                                      ImageSource.camera,
+                                                      context);
+                                              Navigator.pop(context);
+                                              setState(() {
+                                                userImage = file;
+                                              });
+                                            },
+                                            child: Text(
+                                              "Camera",
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            )),
+                                      ),
+                                      SizedBox(
+                                        width: double.infinity,
+                                        child: ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                                backgroundColor: AppColor.pink),
+                                            onPressed: () async {
+                                              File? file =
+                                                  await DCore.pickImages(
+                                                      ImageSource.gallery,
+                                                      context);
+                                              Navigator.pop(context);
+                                              setState(() {
+                                                userImage = file;
+                                              });
+                                            },
+                                            child: Text(
+                                              "Gallary",
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            )),
+                                      ),
+                                      SizedBox(
+                                        width: double.infinity,
+                                        child: ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                                backgroundColor: AppColor.pink),
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: Text(
+                                              "Cancel",
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            )),
+                                      )
+                                    ],
+                                  ));
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle, color: Colors.white),
+                          child: Icon(
+                            Icons.edit,
+                            size: 30,
+                          ),
+                        ),
+                      ),
+                    )
+                  ])
+                ],
               ),
               const SizedBox(
                 height: 36,
@@ -60,22 +178,23 @@ class _SignUpState extends State<SignUp> {
                 height: 15,
               ),
               AuthTextField(
-                  hintText: "Password", controller: passwordEditingController),
+                  hintText: "Confirm Password",
+                  controller: comfirmPasswordEditingController),
               const SizedBox(
                 height: 16,
               ),
               DropdownButtonFormField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     enabledBorder: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(),
                   ),
                   value: userType,
                   items: [
-                    DropdownMenuItem(
+                    const DropdownMenuItem(
                       child: Text("User"),
                       value: 'user',
                     ),
-                    DropdownMenuItem(
+                    const DropdownMenuItem(
                       child: Text("Seller"),
                       value: "seller",
                     )
@@ -125,15 +244,41 @@ class _SignUpState extends State<SignUp> {
                       ],
                     )
                   : Container(),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               GestureDetector(
-                onTap: () {
-                  if (emailEditingController.text.isNotEmpty ) {
-
+                onTap: () async {
+                  if (userImage == null) {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text('Profile Image is required')));
                   }
-                 
+                  if (emailEditingController.text.isEmpty ||
+                      passwordEditingController.text.isEmpty ||
+                      comfirmPasswordEditingController.text.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text('All feild are required')));
+                  } else if (isSeller) {
+                    if (storeEditingController.text.isEmpty ||
+                        firstNameEditingController.text.isEmpty ||
+                        lastNameEditingController.text.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text('All  seller feild are  required')));
+                    }
+                  } else {
+                    var user = await AuthService.createUser(
+                        email: emailEditingController.text,
+                        password: passwordEditingController.text,
+                        isSeller: isSeller,
+                        firstName: firstNameEditingController.text,
+                        lastName: lastNameEditingController.text,
+                        context: context);
+                    if (user == null) {
+                      Navigator.push(context, MaterialPageRoute(builder: (_) {
+                        return const Home();
+                      }));
+                    }
+                  }
                 },
                 child: Container(
                   width: double.infinity,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hackathon/apis/auth.dart';
 import 'package:hackathon/constant/app_image.dart';
+import 'package:hackathon/home/home_nav.dart';
 import 'package:hackathon/home/homepage.dart';
 import 'package:hackathon/signin/signup.dart';
 import 'package:hackathon/signin/widget/auth_text_field.dart';
@@ -51,10 +53,18 @@ class _SignInPageState extends State<SignInPage> {
                 height: 76,
               ),
               GestureDetector(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (_) {
-                    return HomeScreen();
-                  }));
+                onTap: () async {
+                  if (emailEditingController.text.isEmpty ||
+                      passwordEditingController.text.isEmpty) {
+                  } else {
+                    var cred = await AuthService.loginUser(
+                        email: emailEditingController.text,
+                        password: passwordEditingController.text,
+                        context: context);
+                    Navigator.push(context, MaterialPageRoute(builder: (_) {
+                      return Home();
+                    }));
+                  }
                 },
                 child: Container(
                   width: 317,
