@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hackathon/constant/app_image.dart';
+import 'package:hackathon/home/homepage.dart';
 import 'package:hackathon/signin/signup.dart';
 import 'package:hackathon/signin/widget/auth_text_field.dart';
 
@@ -49,20 +50,27 @@ class _SignInPageState extends State<SignInPage> {
               const SizedBox(
                 height: 76,
               ),
-              Container(
-                width: 317,
-                height: 55,
-                decoration: BoxDecoration(
-                  color: const Color(0XFFF83758),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                alignment: Alignment.center,
-                child: const Text(
-                  'LogIn',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xffFFFFFF),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (_) {
+                    return HomeScreen();
+                  }));
+                },
+                child: Container(
+                  width: 317,
+                  height: 55,
+                  decoration: BoxDecoration(
+                    color: const Color(0XFFF83758),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  alignment: Alignment.center,
+                  child: const Text(
+                    'LogIn',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xffFFFFFF),
+                    ),
                   ),
                 ),
               ),

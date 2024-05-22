@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hackathon/constant/app_image.dart';
 import 'package:hackathon/home/widget/banner_widget.dart';
 import 'package:hackathon/home/widget/product_home.dart';
+import 'package:hackathon/home/widget/profile.dart';
 import 'package:hackathon/home/widget/rowavatar.dart';
 import 'package:hackathon/home/widget/shop_page.dart';
 import 'package:hackathon/home/widget/trending_product.dart';
@@ -83,7 +84,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-                const ListTile(
+                ListTile(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (_) {
+                      return const Profile();
+                    }));
+                  },
                   title: Text(
                     'Home',
                     style: TextStyle(color: Colors.blue),
