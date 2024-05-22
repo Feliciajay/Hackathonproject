@@ -17,7 +17,6 @@ class AuthService {
     required String firstName,
     required String lastName,
     String? accountNumber,
-    String? state,
     String? bankName,
     File? image,
     required BuildContext context,
@@ -37,7 +36,6 @@ class AuthService {
             "storeName": storeName,
             "accountNumber": accountNumber,
             "bankName": bankName,
-            "state": state,
             "userType": "seller",
             "profileUrl": profileUrl,
           };
