@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hackathon/home/homepage.dart';
-import 'package:hackathon/home/widget/profile.dart';
+import 'package:hackathon/home/widget/checkout.dart';
 import 'package:hackathon/home/widget/shop_page.dart';
 import 'package:hackathon/home/widget/trending_product.dart';
+
+import '../widget/profile.dart';
 
 class NavbarProvider extends ChangeNotifier {
   int currentIndex = 0;
@@ -10,11 +12,9 @@ class NavbarProvider extends ChangeNotifier {
   List listOfScreen = [
     const HomeScreen(),
     const TrendingProducts(),
+    CheckOut(),
     const ShopPage(),
-    const Center(
-      child: Text("Search"),
-    ),
-    const Profile()
+    Profile(),
   ];
 
   void onChange(int index) {

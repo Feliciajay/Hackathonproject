@@ -27,7 +27,8 @@ class AuthService {
           email: email, password: password);
 
       if (image != null) {
-        String? profileUrl = await FileUpload.UploadFile(image!, context);
+        String? profileUrl =
+            await FileUpload.UploadFile(image!, cre.user!.uid, context);
         if (isSeller) {
           data = {
             "email": email,
@@ -42,8 +43,7 @@ class AuthService {
         } else {
           data = {
             "email": email,
-            "firstName": firstName,
-            "lastName": lastName,
+            "username": firstName,
             "userType": "user",
             "profileUrl": profileUrl,
           };

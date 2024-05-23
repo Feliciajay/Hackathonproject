@@ -191,7 +191,7 @@ class _SignUpState extends State<SignUp> {
                           height: 36,
                         ),
                         AuthTextField(
-                          hintText: "Username Or Email",
+                          hintText: "Email",
                           controller: emailEditingController,
                         ),
                         const SizedBox(
@@ -273,7 +273,12 @@ class _SignUpState extends State<SignUp> {
                                   ),
                                 ],
                               )
-                            : Container(),
+                            : AuthTextField(
+                                hintText: "UserName",
+                                controller: firstNameEditingController),
+                        const SizedBox(
+                          height: 10,
+                        ),
                         const SizedBox(
                           height: 20,
                         ),

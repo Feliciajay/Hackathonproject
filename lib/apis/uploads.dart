@@ -6,10 +6,11 @@ import 'package:flutter/material.dart';
 class FileUpload {
   static var firebaseFireStore = FirebaseStorage.instance;
 
-  static Future<String?> UploadFile(File image, BuildContext context) async {
+  static Future<String?> UploadFile(
+      File image, String uid, BuildContext context) async {
     try {
       var uploadTask =
-          await firebaseFireStore.ref().child('profilePic').putFile(image);
+          await firebaseFireStore.ref("profilePic").child(uid).putFile(image);
 
       TaskSnapshot downloadURL = (await uploadTask);
       String url = await downloadURL.ref.getDownloadURL();

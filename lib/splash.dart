@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hackathon/check.dart';
 import 'package:hackathon/onboarding/onboarding.dart';
 
 class FrontPage extends StatefulWidget {
@@ -14,10 +15,10 @@ class _FrontPageState extends State<FrontPage> {
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (_) => const Onboarding()),
+        MaterialPageRoute(builder: (_) => const CheckScreen()),
       );
     });
-    // TODO: implement initState
+
     super.initState();
   }
 
