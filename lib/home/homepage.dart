@@ -1,10 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:hackathon/constant/app_image.dart';
 import 'package:hackathon/home/widget/banner_widget.dart';
+import 'package:hackathon/home/widget/place_order.dart';
 import 'package:hackathon/home/widget/product_home.dart';
 import 'package:hackathon/home/widget/profile.dart';
 import 'package:hackathon/home/widget/rowavatar.dart';
+import 'package:hackathon/home/widget/shipping.dart';
 import 'package:hackathon/home/widget/shop_page.dart';
 import 'package:hackathon/home/widget/trending_product.dart';
 
@@ -84,38 +88,42 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-                ListTile(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (_) {
-                      return const Profile();
-                    }));
-                  },
+                const ListTile(
                   title: Text(
                     'Home',
                     style: TextStyle(color: Colors.blue),
                   ),
                 ),
-                ListTile(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (_) {
-                      return const ShopPage();
-                    }));
-                  },
-                  title: const Text(
+                const ListTile(
+                  title: Text(
                     'Shop',
                     style: TextStyle(color: Colors.purple),
                   ),
                 ),
-                const ListTile(
-                  title: Text(
-                    'Payment',
-                    style: TextStyle(color: Colors.red),
+                ListTile(
+                  title: GestureDetector(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (_) {
+                        return const Shipping();
+                      }));
+                    },
+                    child: const Text(
+                      'Payment',
+                      style: TextStyle(color: Colors.red),
+                    ),
                   ),
                 ),
-                const ListTile(
-                  title: Text(
-                    'Terms and Conditions',
-                    style: TextStyle(color: Colors.green),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (_) {
+                      return const PlaceOrder();
+                    }));
+                  },
+                  child: const ListTile(
+                    title: Text(
+                      'Place Order',
+                      style: TextStyle(color: Colors.green),
+                    ),
                   ),
                 ),
                 const ListTile(

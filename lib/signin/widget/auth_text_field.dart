@@ -15,20 +15,23 @@ class _AuthTextFieldState extends State<AuthTextField> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      obscureText: widget.hintText.toLowerCase().contains("password")
+          ? _obscuretext
+          : false,
       controller: widget.controller,
       decoration: InputDecoration(
-        enabledBorder: OutlineInputBorder(),
-        focusedBorder: OutlineInputBorder(),
+        enabledBorder: const OutlineInputBorder(),
+        focusedBorder: const OutlineInputBorder(),
         prefixIcon: widget.hintText.toLowerCase().contains("email")
             ? const Icon(Icons.person)
             : widget.hintText.toLowerCase().contains("password")
                 ? const Icon(Icons.lock)
                 : widget.hintText.toLowerCase().contains("store")
-                    ? Icon(Icons.store)
+                    ? const Icon(Icons.store)
                     : widget.hintText.toLowerCase().contains("name")
-                        ? Icon(Icons.person_2_rounded)
+                        ? const Icon(Icons.person_2_rounded)
                         : widget.hintText.toLowerCase().contains("number")
-                            ? Icon(Icons.balance)
+                            ? const Icon(Icons.balance)
                             : null,
         suffixIcon: widget.hintText.toLowerCase().contains("password")
             ? IconButton(

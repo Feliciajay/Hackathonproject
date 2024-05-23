@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hackathon/constant/app_color.dart';
+import 'package:hackathon/home/widget/checkout.dart';
 import 'package:hackathon/home/widget/successful.dart';
 
 class Shipping extends StatefulWidget {
@@ -107,7 +108,9 @@ class _ShippingState extends State<Shipping> {
                 child: const Padding(
                   padding: EdgeInsets.only(left: 15),
                   child: TextField(
-                    decoration: InputDecoration(hintText: ('450116')),
+                    decoration: InputDecoration(
+                      hintText: ('Visa'),
+                    ),
                   ),
                 ),
               ),
@@ -171,19 +174,26 @@ class _ShippingState extends State<Shipping> {
                     }),
                   );
                 },
-                child: Container(
-                  width: 219,
-                  height: 48,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.red),
-                  child: const Center(
-                    child: Text(
-                      'Continue',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (_) {
+                      return const CheckOut();
+                    }));
+                  },
+                  child: Container(
+                    width: 219,
+                    height: 48,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.red),
+                    child: const Center(
+                      child: Text(
+                        'Continue',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600),
+                      ),
                     ),
                   ),
                 ),

@@ -44,7 +44,7 @@ class _SignUpState extends State<SignUp> {
     return Scaffold(
       body: SafeArea(
         child: isLoading
-            ? Center(
+            ? const Center(
                 child: CircularProgressIndicator(
                   color: AppColor.pink,
                 ),
@@ -58,7 +58,7 @@ class _SignUpState extends State<SignUp> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
+                            const Text(
                               'Create an\n account!',
                               style: TextStyle(
                                 fontSize: 36,
@@ -70,7 +70,7 @@ class _SignUpState extends State<SignUp> {
                               CircleAvatar(
                                 radius: 70,
                                 child: userImage == null
-                                    ? Icon(
+                                    ? const Icon(
                                         Icons.android,
                                         size: 70,
                                       )
@@ -92,7 +92,7 @@ class _SignUpState extends State<SignUp> {
                                     showDialog(
                                         context: context,
                                         builder: (context) => AlertDialog(
-                                              title: Text(
+                                              title: const Text(
                                                 "Pick Your Desire",
                                                 style: TextStyle(
                                                     fontWeight:
@@ -118,7 +118,7 @@ class _SignUpState extends State<SignUp> {
                                                           userImage = file;
                                                         });
                                                       },
-                                                      child: Text(
+                                                      child: const Text(
                                                         "Camera",
                                                         style: TextStyle(
                                                             color:
@@ -144,7 +144,7 @@ class _SignUpState extends State<SignUp> {
                                                           userImage = file;
                                                         });
                                                       },
-                                                      child: Text(
+                                                      child: const Text(
                                                         "Gallary",
                                                         style: TextStyle(
                                                             color:
@@ -162,7 +162,7 @@ class _SignUpState extends State<SignUp> {
                                                       onPressed: () {
                                                         Navigator.pop(context);
                                                       },
-                                                      child: Text(
+                                                      child: const Text(
                                                         "Cancel",
                                                         style: TextStyle(
                                                             color:
@@ -173,11 +173,11 @@ class _SignUpState extends State<SignUp> {
                                             ));
                                   },
                                   child: Container(
-                                    padding: EdgeInsets.all(5),
-                                    decoration: BoxDecoration(
+                                    padding: const EdgeInsets.all(5),
+                                    decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
                                         color: Colors.white),
-                                    child: Icon(
+                                    child: const Icon(
                                       Icons.edit,
                                       size: 30,
                                     ),
@@ -322,7 +322,7 @@ class _SignUpState extends State<SignUp> {
                                 isLoading = false;
                               });
                               if (user != null) {
-                                Navigator.push(context,
+                                Navigator.pushReplacement(context,
                                     MaterialPageRoute(builder: (_) {
                                   return const Home();
                                 }));

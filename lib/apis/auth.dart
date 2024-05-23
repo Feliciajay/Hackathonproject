@@ -82,4 +82,8 @@ class AuthService {
           .showSnackBar(SnackBar(content: Text('${e.message}')));
     }
   }
+
+  static Future logout() async {
+    firebaseauth.signOut();
+  }
 }

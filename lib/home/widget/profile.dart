@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hackathon/apis/auth.dart';
 import 'package:hackathon/constant/app_color.dart';
 import 'package:hackathon/constant/app_image.dart';
+import 'package:hackathon/home/home_nav.dart';
+import 'package:hackathon/home/homepage.dart';
 import 'package:hackathon/home/widget/checkout.dart';
+import 'package:hackathon/signin/signin.dart';
 import 'package:hackathon/signin/widget/auth_text_field.dart';
 
 class Profile extends StatefulWidget {
@@ -18,12 +22,12 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffFDFDFD),
+      backgroundColor: Color(0xffFDFDFD),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const Padding(
+              Padding(
                 padding: EdgeInsets.only(left: 20),
                 child: Row(
                   children: [
@@ -36,6 +40,20 @@ class _ProfileState extends State<Profile> {
                             fontSize: 18, fontWeight: FontWeight.w600),
                       ),
                     ),
+                    SizedBox(
+                      width: 50,
+                    ),
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColor.pink),
+                        onPressed: () async {
+                          await AuthService.logout();
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (_) {
+                            return const SignInPage();
+                          }));
+                        },
+                        child: Text('LogOut'))
                   ],
                 ),
               ),
@@ -328,7 +346,7 @@ class _ProfileState extends State<Profile> {
                 child: GestureDetector(
                   onTap: () {
                     Navigator.push(context, MaterialPageRoute(builder: (_) {
-                      return const CheckOut();
+                      return const HomeScreen();
                     }));
                   },
                   child: const Text(
